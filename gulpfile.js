@@ -28,7 +28,7 @@ gulp.task('browser-sync',  gulp.series('styles', (done) => {
   browserSync.init({
         server: './public',
         notify: false,
-        open: true
+        open: false
     });
 
     done();
