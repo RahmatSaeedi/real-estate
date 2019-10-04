@@ -1,9 +1,9 @@
 $darkpurple: #0C0C50;
-$grey: #FAFAFA;
+$grey: rgb(240, 240, 240);
 $offwhite: #fff0ff;
 $pink: #FF7090;
 $offpink: #FF80A0;
-$darkgrey: #ADADAD;
+$darkgrey: #5D5D5D;
 
 
 
@@ -13,3 +13,8 @@ $navTextHoverColor:  $offpink;
 $btnBgColor: $pink;
 $btnBgColorHover: $offpink;
 $btnTextColor: white;
+
+$filterBg: $grey;
+$listingsBg: $offwhite;
+
+$filtersTitleColor: $darkgrey;
