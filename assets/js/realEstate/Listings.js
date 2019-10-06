@@ -7,6 +7,37 @@ export default class Listings extends Component {
   constructor () {
     super()
     this.state = {}
+    this.listListings = this.listListings.bind(this)
+  }
+
+  listListings () {
+    var {listingsData} = this.props;
+    return listingsData.map((listing, index) => {
+      return (
+        <div className="listing" key={index}>
+          <div className="listing-img" style={{background: `url("${listing.image}") no-repeat center center`}}>
+            <span className="address">{listing.address}</span>
+            <div className="details">
+              <div className="user-img"></div>
+              <div className="user-details">
+                <span className="user-name">Jane Smith</span>
+                <span className="post-date">2019/05/05</span>
+              </div>
+              <div className="listing-details">
+                <div className="floor-space" > <FontAwesomeIcon icon={faSquare} className="fa" /> <span>{listing.floorSpace} ft&#178;</span> </div>
+                <div className="bedrooms"><FontAwesomeIcon icon={faBed} className="fa" /> <span>{listing.bedrooms} bedrooms</span></div>
+                <div className="view-listing-btn">View Listing</div>
+              </div>
+            </div>
+          </div>
+          <div className="bottom-info">
+            <span className="rent">${listing.price} / month</span>
+            <span className="location"><FontAwesomeIcon icon={faMapMarker}/> {listing.location}, {listing.city}</span>
+          </div>
+        </div>
+      );
+    });
+    return 
   }
 
   render () {
@@ -29,135 +60,12 @@ export default class Listings extends Component {
         </div>
       </section>
       <section id="listings-results">
-        <div className="col-md-3">
-        <div className="listing">
-            <div className="listing-img">
-              <span className="address">12345 - 12 Street</span>
-              <div className="details">
-                <div className="user-img"></div>
-                <div className="user-details">
-                  <span className="user-name">Jane Smith</span>
-                  <span className="post-date">2019/05/05</span>
-                </div>
-                <div className="listing-details">
-                  <div className="floor-space" > <FontAwesomeIcon icon={faSquare} className="fa" /> <span>1500 ft&#178;</span> </div>
-                  <div className="bedrooms"><FontAwesomeIcon icon={faBed} className="fa" /> <span>3 bedrooms</span></div>
-                  <div className="view-listing-btn">View Listing</div>
-                </div>
-              </div>
-            </div>
-            <div className="bottom-info">
-              <span className="rent">$1000 / month</span>
-              <span className="location"><FontAwesomeIcon icon={faMapMarker}/> Northgate, Edmonton</span>
-            </div>
-          </div>
-          <div className="listing">
-            <div className="listing-img">
-              <span className="address">12345 - 12 Street</span>
-              <div className="details">
-                <div className="user-img"></div>
-                <div className="user-details">
-                  <span className="user-name">Jane Smith</span>
-                  <span className="post-date">2019/05/05</span>
-                </div>
-                <div className="listing-details">
-                  <div className="floor-space" > <FontAwesomeIcon icon={faSquare} className="fa" /> <span>1500 ft&#178;</span> </div>
-                  <div className="bedrooms"><FontAwesomeIcon icon={faBed} className="fa" /> <span>3 bedrooms</span></div>
-                  <div className="view-listing-btn">View Listing</div>
-                </div>
-              </div>
-            </div>
-            <div className="bottom-info">
-              <span className="rent">$1000 / month</span>
-              <span className="location"><FontAwesomeIcon icon={faMapMarker}/> Northgate, Edmonton</span>
-            </div>
-          </div>
-          <div className="listing">
-            <div className="listing-img">
-              <span className="address">12345 - 12 Street</span>
-              <div className="details">
-                <div className="user-img"></div>
-                <div className="user-details">
-                  <span className="user-name">Jane Smith</span>
-                  <span className="post-date">2019/05/05</span>
-                </div>
-                <div className="listing-details">
-                  <div className="floor-space" > <FontAwesomeIcon icon={faSquare} className="fa" /> <span>1500 ft&#178;</span> </div>
-                  <div className="bedrooms"><FontAwesomeIcon icon={faBed} className="fa" /> <span>3 bedrooms</span></div>
-                  <div className="view-listing-btn">View Listing</div>
-                </div>
-              </div>
-            </div>
-            <div className="bottom-info">
-              <span className="rent">$1000 / month</span>
-              <span className="location"><FontAwesomeIcon icon={faMapMarker}/> Northgate, Edmonton</span>
-            </div>
-          </div>
-          <div className="listing">
-            <div className="listing-img">
-              <span className="address">12345 - 12 Street</span>
-              <div className="details">
-                <div className="user-img"></div>
-                <div className="user-details">
-                  <span className="user-name">Jane Smith</span>
-                  <span className="post-date">2019/05/05</span>
-                </div>
-                <div className="listing-details">
-                  <div className="floor-space" > <FontAwesomeIcon icon={faSquare} className="fa" /> <span>1500 ft&#178;</span> </div>
-                  <div className="bedrooms"><FontAwesomeIcon icon={faBed} className="fa" /> <span>3 bedrooms</span></div>
-                  <div className="view-listing-btn">View Listing</div>
-                </div>
-              </div>
-            </div>
-            <div className="bottom-info">
-              <span className="rent">$1000 / month</span>
-              <span className="location"><FontAwesomeIcon icon={faMapMarker}/> Northgate, Edmonton</span>
-            </div>
-          </div>
-          <div className="listing">
-            <div className="listing-img">
-              <span className="address">12345 - 12 Street</span>
-              <div className="details">
-                <div className="user-img"></div>
-                <div className="user-details">
-                  <span className="user-name">Jane Smith</span>
-                  <span className="post-date">2019/05/05</span>
-                </div>
-                <div className="listing-details">
-                  <div className="floor-space" > <FontAwesomeIcon icon={faSquare} className="fa" /> <span>1500 ft&#178;</span> </div>
-                  <div className="bedrooms"><FontAwesomeIcon icon={faBed} className="fa" /> <span>3 bedrooms</span></div>
-                  <div className="view-listing-btn">View Listing</div>
-                </div>
-              </div>
-            </div>
-            <div className="bottom-info">
-              <span className="rent">$1000 / month</span>
-              <span className="location"><FontAwesomeIcon icon={faMapMarker}/> Northgate, Edmonton</span>
-            </div>
-          </div>
-          <div className="listing">
-            <div className="listing-img">
-              <span className="address">12345 - 12 Street</span>
-              <div className="details">
-                <div className="user-img"></div>
-                <div className="user-details">
-                  <span className="user-name">Jane Smith</span>
-                  <span className="post-date">2019/05/05</span>
-                </div>
-                <div className="listing-details">
-                  <div className="floor-space" > <FontAwesomeIcon icon={faSquare} className="fa" /> <span>1500 ft&#178;</span> </div>
-                  <div className="bedrooms"><FontAwesomeIcon icon={faBed} className="fa" /> <span>3 bedrooms</span></div>
-                  <div className="view-listing-btn">View Listing</div>
-                </div>
-              </div>
-            </div>
-            <div className="bottom-info">
-              <span className="rent">$1000 / month</span>
-              <span className="location"><FontAwesomeIcon icon={faMapMarker}/> Northgate, Edmonton</span>
-            </div>
-          </div>
+      <div className="col-md-3">
         
-        </div>
+        {this.listListings()}
+
+      
+      </div>
       </section>
       <section id="pagination">
         <ul className="pages">

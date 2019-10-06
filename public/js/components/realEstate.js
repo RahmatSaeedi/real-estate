@@ -49,69 +49,69 @@ var Filter = function (_Component) {
         ),
         _react2.default.createElement(
           'select',
-          { name: 'neighbourhood', className: 'filters neighbourhood' },
+          { name: 'neighbourhood', className: 'filters neighbourhood', onChange: this.props.change },
           _react2.default.createElement(
             'option',
-            null,
+            { value: 'Castle Downs' },
             'Castle Downs'
           ),
           _react2.default.createElement(
             'option',
-            null,
+            { value: 'Northgate' },
             'Northgate'
           ),
           _react2.default.createElement(
             'option',
-            null,
+            { value: 'Southgate' },
             'Southgate'
           ),
           _react2.default.createElement(
             'option',
-            null,
+            { value: 'Downtown' },
             'Downtown'
           )
         ),
         _react2.default.createElement(
           'select',
-          { name: 'house-type', className: 'filters house-type' },
+          { name: 'house-type', className: 'filters house-type', onChange: this.props.change },
           _react2.default.createElement(
             'option',
-            null,
+            { value: 'Townhouse' },
             'Townhouse'
           ),
           _react2.default.createElement(
             'option',
-            null,
+            { value: 'Semi-detached' },
             'Semi-detached'
           ),
           _react2.default.createElement(
             'option',
-            null,
+            { value: 'Duplex' },
             'Duplex'
           ),
           _react2.default.createElement(
             'option',
-            null,
+            { value: 'Apartment' },
             'Apartment'
           )
         ),
         _react2.default.createElement(
           'select',
-          { name: 'bedrooms', className: 'filters bedrooms' },
+          { name: 'bedrooms', className: 'filters bedrooms', onChange: this.props.change },
           _react2.default.createElement(
             'option',
-            null,
+            { value: '1' },
             '1 bedroom'
           ),
           _react2.default.createElement(
             'option',
-            null,
+            { value: '2' },
             '2 bedroom'
           ),
           _react2.default.createElement(
             'option',
-            null,
-            '3+ bedroom'
+            { value: '3' },
+            '3 bedroom'
           )
         ),
         _react2.default.createElement(
@@ -122,8 +122,8 @@ var Filter = function (_Component) {
             { className: 'title' },
             'Price'
           ),
-          _react2.default.createElement('input', { type: 'text', name: 'min-price' }),
-          _react2.default.createElement('input', { type: 'text', name: 'max-price' })
+          _react2.default.createElement('input', { type: 'text', name: 'min_price', onChange: this.props.change, value: this.props.globalState.min_price }),
+          _react2.default.createElement('input', { type: 'text', name: 'max_price', onChange: this.props.change, value: this.props.globalState.max_price })
         ),
         _react2.default.createElement(
           'div',
@@ -133,8 +133,8 @@ var Filter = function (_Component) {
             { className: 'title' },
             'Floor Space'
           ),
-          _react2.default.createElement('input', { type: 'text', name: 'min-space' }),
-          _react2.default.createElement('input', { type: 'text', name: 'max-space' })
+          _react2.default.createElement('input', { type: 'text', name: 'min_space', onChange: this.props.change, value: this.props.globalState.min_space }),
+          _react2.default.createElement('input', { type: 'text', name: 'max_space', onChange: this.props.change, value: this.props.globalState.max_space })
         ),
         _react2.default.createElement(
           'div',
@@ -146,27 +146,27 @@ var Filter = function (_Component) {
           ),
           _react2.default.createElement(
             'label',
-            null,
+            { htmlFor: 'extras' },
             'Elevators',
-            _react2.default.createElement('input', { type: 'checkbox', value: 'elevators', name: 'extras' })
+            _react2.default.createElement('input', { type: 'checkbox', value: 'elevators', name: 'elevator', onChange: this.props.change })
           ),
           _react2.default.createElement(
             'label',
-            null,
+            { htmlFor: 'extras' },
             'Swimming pool',
-            _react2.default.createElement('input', { type: 'checkbox', value: 'swimmingPool', name: 'extras' })
+            _react2.default.createElement('input', { type: 'checkbox', value: 'swimmingPool', name: 'pool', onChange: this.props.change })
           ),
           _react2.default.createElement(
             'label',
-            null,
+            { htmlFor: 'extras' },
             'Finished Basement',
-            _react2.default.createElement('input', { type: 'checkbox', value: 'finishedBasement', name: 'extras' })
+            _react2.default.createElement('input', { type: 'checkbox', value: 'finishedBasement', name: 'basement', onChange: this.props.change })
           ),
           _react2.default.createElement(
             'label',
-            null,
+            { htmlFor: 'extras' },
             'Gym',
-            _react2.default.createElement('input', { type: 'checkbox', value: 'gym', name: 'extras' })
+            _react2.default.createElement('input', { type: 'checkbox', value: 'gym', name: 'gym', onChange: this.props.change })
           )
         )
       );
@@ -299,10 +299,107 @@ var Listings = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Listings.__proto__ || Object.getPrototypeOf(Listings)).call(this));
 
     _this.state = {};
+    _this.listListings = _this.listListings.bind(_this);
     return _this;
   }
 
   _createClass(Listings, [{
+    key: 'listListings',
+    value: function listListings() {
+      var listingsData = this.props.listingsData;
+
+      return listingsData.map(function (listing, index) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'listing', key: index },
+          _react2.default.createElement(
+            'div',
+            { className: 'listing-img', style: { background: 'url("' + listing.image + '") no-repeat center center' } },
+            _react2.default.createElement(
+              'span',
+              { className: 'address' },
+              listing.address
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'details' },
+              _react2.default.createElement('div', { className: 'user-img' }),
+              _react2.default.createElement(
+                'div',
+                { className: 'user-details' },
+                _react2.default.createElement(
+                  'span',
+                  { className: 'user-name' },
+                  'Jane Smith'
+                ),
+                _react2.default.createElement(
+                  'span',
+                  { className: 'post-date' },
+                  '2019/05/05'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'listing-details' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'floor-space' },
+                  ' ',
+                  _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faSquare, className: 'fa' }),
+                  ' ',
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    listing.floorSpace,
+                    ' ft\xB2'
+                  ),
+                  ' '
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'bedrooms' },
+                  _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faBed, className: 'fa' }),
+                  ' ',
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    listing.bedrooms,
+                    ' bedrooms'
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'view-listing-btn' },
+                  'View Listing'
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'bottom-info' },
+            _react2.default.createElement(
+              'span',
+              { className: 'rent' },
+              '$',
+              listing.price,
+              ' / month'
+            ),
+            _react2.default.createElement(
+              'span',
+              { className: 'location' },
+              _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMapMarker }),
+              ' ',
+              listing.location,
+              ', ',
+              listing.city
+            )
+          )
+        );
+      });
+      return;
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -352,486 +449,7 @@ var Listings = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'col-md-3' },
-            _react2.default.createElement(
-              'div',
-              { className: 'listing' },
-              _react2.default.createElement(
-                'div',
-                { className: 'listing-img' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'address' },
-                  '12345 - 12 Street'
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'details' },
-                  _react2.default.createElement('div', { className: 'user-img' }),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'user-details' },
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'user-name' },
-                      'Jane Smith'
-                    ),
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'post-date' },
-                      '2019/05/05'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'listing-details' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'floor-space' },
-                      ' ',
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faSquare, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '1500 ft\xB2'
-                      ),
-                      ' '
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'bedrooms' },
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faBed, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '3 bedrooms'
-                      )
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'view-listing-btn' },
-                      'View Listing'
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'bottom-info' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'rent' },
-                  '$1000 / month'
-                ),
-                _react2.default.createElement(
-                  'span',
-                  { className: 'location' },
-                  _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMapMarker }),
-                  ' Northgate, Edmonton'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'listing' },
-              _react2.default.createElement(
-                'div',
-                { className: 'listing-img' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'address' },
-                  '12345 - 12 Street'
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'details' },
-                  _react2.default.createElement('div', { className: 'user-img' }),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'user-details' },
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'user-name' },
-                      'Jane Smith'
-                    ),
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'post-date' },
-                      '2019/05/05'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'listing-details' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'floor-space' },
-                      ' ',
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faSquare, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '1500 ft\xB2'
-                      ),
-                      ' '
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'bedrooms' },
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faBed, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '3 bedrooms'
-                      )
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'view-listing-btn' },
-                      'View Listing'
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'bottom-info' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'rent' },
-                  '$1000 / month'
-                ),
-                _react2.default.createElement(
-                  'span',
-                  { className: 'location' },
-                  _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMapMarker }),
-                  ' Northgate, Edmonton'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'listing' },
-              _react2.default.createElement(
-                'div',
-                { className: 'listing-img' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'address' },
-                  '12345 - 12 Street'
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'details' },
-                  _react2.default.createElement('div', { className: 'user-img' }),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'user-details' },
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'user-name' },
-                      'Jane Smith'
-                    ),
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'post-date' },
-                      '2019/05/05'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'listing-details' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'floor-space' },
-                      ' ',
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faSquare, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '1500 ft\xB2'
-                      ),
-                      ' '
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'bedrooms' },
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faBed, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '3 bedrooms'
-                      )
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'view-listing-btn' },
-                      'View Listing'
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'bottom-info' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'rent' },
-                  '$1000 / month'
-                ),
-                _react2.default.createElement(
-                  'span',
-                  { className: 'location' },
-                  _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMapMarker }),
-                  ' Northgate, Edmonton'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'listing' },
-              _react2.default.createElement(
-                'div',
-                { className: 'listing-img' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'address' },
-                  '12345 - 12 Street'
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'details' },
-                  _react2.default.createElement('div', { className: 'user-img' }),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'user-details' },
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'user-name' },
-                      'Jane Smith'
-                    ),
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'post-date' },
-                      '2019/05/05'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'listing-details' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'floor-space' },
-                      ' ',
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faSquare, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '1500 ft\xB2'
-                      ),
-                      ' '
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'bedrooms' },
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faBed, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '3 bedrooms'
-                      )
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'view-listing-btn' },
-                      'View Listing'
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'bottom-info' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'rent' },
-                  '$1000 / month'
-                ),
-                _react2.default.createElement(
-                  'span',
-                  { className: 'location' },
-                  _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMapMarker }),
-                  ' Northgate, Edmonton'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'listing' },
-              _react2.default.createElement(
-                'div',
-                { className: 'listing-img' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'address' },
-                  '12345 - 12 Street'
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'details' },
-                  _react2.default.createElement('div', { className: 'user-img' }),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'user-details' },
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'user-name' },
-                      'Jane Smith'
-                    ),
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'post-date' },
-                      '2019/05/05'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'listing-details' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'floor-space' },
-                      ' ',
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faSquare, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '1500 ft\xB2'
-                      ),
-                      ' '
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'bedrooms' },
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faBed, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '3 bedrooms'
-                      )
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'view-listing-btn' },
-                      'View Listing'
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'bottom-info' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'rent' },
-                  '$1000 / month'
-                ),
-                _react2.default.createElement(
-                  'span',
-                  { className: 'location' },
-                  _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMapMarker }),
-                  ' Northgate, Edmonton'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'listing' },
-              _react2.default.createElement(
-                'div',
-                { className: 'listing-img' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'address' },
-                  '12345 - 12 Street'
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'details' },
-                  _react2.default.createElement('div', { className: 'user-img' }),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'user-details' },
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'user-name' },
-                      'Jane Smith'
-                    ),
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'post-date' },
-                      '2019/05/05'
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'listing-details' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'floor-space' },
-                      ' ',
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faSquare, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '1500 ft\xB2'
-                      ),
-                      ' '
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'bedrooms' },
-                      _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faBed, className: 'fa' }),
-                      ' ',
-                      _react2.default.createElement(
-                        'span',
-                        null,
-                        '3 bedrooms'
-                      )
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'view-listing-btn' },
-                      'View Listing'
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'bottom-info' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'rent' },
-                  '$1000 / month'
-                ),
-                _react2.default.createElement(
-                  'span',
-                  { className: 'location' },
-                  _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMapMarker }),
-                  ' Northgate, Edmonton'
-                )
-              )
-            )
+            this.listListings()
           )
         ),
         _react2.default.createElement(
@@ -906,7 +524,7 @@ var listingsData = [{
   address: '123 - 95 Avenue',
   location: 'Castle Downs',
   city: 'Edmonton',
-  rooms: 1,
+  bedrooms: 1,
   price: 850,
   floorSpace: 1850,
   extras: ['elevator', 'gym'],
@@ -916,7 +534,7 @@ var listingsData = [{
   address: '5483 - 78 St',
   location: 'Northgate',
   city: 'Edmonton',
-  rooms: 2,
+  bedrooms: 2,
   price: 950,
   floorSpace: 1500,
   extras: ['gym'],
@@ -926,7 +544,7 @@ var listingsData = [{
   address: '604 - 79 Street',
   location: 'Southgate',
   city: 'Edmonton',
-  rooms: 3,
+  bedrooms: 3,
   price: 1150,
   floorSpace: 1000,
   extras: ['pool', 'basement'],
@@ -936,7 +554,7 @@ var listingsData = [{
   address: '7890 - 86 Street',
   location: 'Downtown',
   city: 'Edmonton',
-  rooms: 4,
+  bedrooms: 3,
   price: 1450,
   floorSpace: 1400,
   extras: ['pool', 'gym'],
@@ -946,7 +564,7 @@ var listingsData = [{
   address: '945 - 33 Street',
   location: 'Northgate',
   city: 'Edmonton',
-  rooms: 2,
+  bedrooms: 2,
   price: 1650,
   floorSpace: 1500,
   extras: ['pool', 'gym', 'basement'],
@@ -956,7 +574,7 @@ var listingsData = [{
   address: '91 - 12 Avenue',
   location: 'Downtown',
   city: 'Edmonton',
-  rooms: 1,
+  bedrooms: 1,
   price: 850,
   floorSpace: 2000,
   extras: ['basement', 'gym'],
@@ -1002,6 +620,8 @@ var _listingsData2 = _interopRequireDefault(_listingsData);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -1017,12 +637,28 @@ var RealEstate = function (_Component) {
     var _this = _possibleConstructorReturn(this, (RealEstate.__proto__ || Object.getPrototypeOf(RealEstate)).call(this));
 
     _this.state = {
-      listingsData: _listingsData2.default
+      listingsData: _listingsData2.default,
+      min_price: 0,
+      max_price: 10000,
+      min_space: 0,
+      max_space: 10000
     };
+    _this.change = _this.change.bind(_this);
     return _this;
   }
 
   _createClass(RealEstate, [{
+    key: 'change',
+    value: function change(event) {
+      var _this2 = this;
+
+      var name = event.target.name;
+      var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+      this.setState(_defineProperty({}, name, value), function () {
+        console.log(_this2.state);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -1032,8 +668,8 @@ var RealEstate = function (_Component) {
         _react2.default.createElement(
           'section',
           { id: 'content-area' },
-          _react2.default.createElement(_Filter2.default, null),
-          _react2.default.createElement(_Listings2.default, null)
+          _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state }),
+          _react2.default.createElement(_Listings2.default, { listingsData: this.state.listingsData })
         ),
         _react2.default.createElement(
           'div',

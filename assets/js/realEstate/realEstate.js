@@ -10,16 +10,31 @@ class RealEstate extends Component {
   constructor () {
     super()
     this.state = {
-      listingsData
+      listingsData,
+      min_price: 0,
+      max_price: 10000,
+      min_space: 0,
+      max_space: 10000,
     }
+    this.change = this.change.bind(this)
   }
 
+  change(event) {
+    const name=event.target.name;
+    const value= (event.target.type === 'checkbox') ?  event.target.checked : event.target.value;
+    this.setState({
+      [name]: value
+    }, ()=>{
+      console.log(this.state);
+    });
+
+  }
   render () {
     return (<div>
       <Header />
       <section id="content-area">
-        <Filter />
-        <Listings />
+        <Filter change={this.change} globalState={this.state}/>
+        <Listings listingsData={this.state.listingsData}/>
       </section>
       <div className="footer">welp</div>
       
