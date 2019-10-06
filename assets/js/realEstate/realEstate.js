@@ -17,6 +17,8 @@ class RealEstate extends Component {
         <Filter />
         <Listings />
       </section>
+      <div className="footer">welp</div>
+      
     </div>);
   }
 }

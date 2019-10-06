@@ -852,10 +852,10 @@ var Listings = function (_Component) {
         ),
         _react2.default.createElement(
           'section',
-          { className: 'pagination' },
+          { id: 'pagination' },
           _react2.default.createElement(
             'ul',
-            { className: 'pagination-numbers' },
+            { className: 'pages' },
             _react2.default.createElement(
               'li',
               null,
@@ -868,7 +868,7 @@ var Listings = function (_Component) {
             ),
             _react2.default.createElement(
               'li',
-              null,
+              { className: 'active' },
               '2'
             ),
             _react2.default.createElement(
@@ -969,6 +969,11 @@ var RealEstate = function (_Component) {
           { id: 'content-area' },
           _react2.default.createElement(_Filter2.default, null),
           _react2.default.createElement(_Listings2.default, null)
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'footer' },
+          'welp'
         )
       );
     }
