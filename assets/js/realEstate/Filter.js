@@ -19,14 +19,13 @@ export default class Filter extends Component {
         <option>Townhouse</option>
         <option>Semi-detached</option>
         <option>Duplex</option>
-        <option>Apartments </option>
+        <option>Apartment</option>
       </select>
 
       <select name="bedrooms" className="filters bedrooms">
-        <option>Castle Downs</option>
-        <option>Northgate</option>
-        <option>Southgate</option>
-        <option>Downtown</option>
+        <option>1 bedroom</option>
+        <option>2 bedroom</option>
+        <option>3+ bedroom</option>
       </select>
 
       <div className="filters price">
@@ -41,30 +40,25 @@ export default class Filter extends Component {
         <input type="text" name="max-space" />
       </div>
 
-      <div className="filters price">
-        <span className="title">Price</span>
-        <input type="text" name="min-price" />
-        <input type="text" name="max-price" />
-      </div>
 
       <div className='filters extras'>
         <span className="title"> Extras </span>
-        <label for="extras">
+        <label>
           Elevators 
           <input type="checkbox" value="elevators" name="extras"/>
         </label>
 
-        <label for="extras">
+        <label>
           Swimming pool
           <input type="checkbox" value="swimmingPool" name="extras"/>
         </label>
 
-        <label for="extras">
+        <label>
           Finished Basement
           <input type="checkbox" value="finishedBasement" name="extras"/>
         </label>
 
-        <label for="extras">
+        <label>
           Gym
           <input type="checkbox" value="gym" name="extras"/>
         </label>

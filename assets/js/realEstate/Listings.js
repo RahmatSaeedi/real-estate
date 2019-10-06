@@ -36,7 +36,7 @@ export default class Listings extends Component {
               <div className="details">
                 <div className="user-img"></div>
                 <div className="user-details">
-                  <span className="user-name">John Smith</span>
+                  <span className="user-name">Jane Smith</span>
                   <span className="post-date">2019/05/05</span>
                 </div>
                 <div className="listing-details">
@@ -57,7 +57,7 @@ export default class Listings extends Component {
               <div className="details">
                 <div className="user-img"></div>
                 <div className="user-details">
-                  <span className="user-name">John Smith</span>
+                  <span className="user-name">Jane Smith</span>
                   <span className="post-date">2019/05/05</span>
                 </div>
                 <div className="listing-details">
@@ -78,7 +78,7 @@ export default class Listings extends Component {
               <div className="details">
                 <div className="user-img"></div>
                 <div className="user-details">
-                  <span className="user-name">John Smith</span>
+                  <span className="user-name">Jane Smith</span>
                   <span className="post-date">2019/05/05</span>
                 </div>
                 <div className="listing-details">
@@ -99,7 +99,7 @@ export default class Listings extends Component {
               <div className="details">
                 <div className="user-img"></div>
                 <div className="user-details">
-                  <span className="user-name">John Smith</span>
+                  <span className="user-name">Jane Smith</span>
                   <span className="post-date">2019/05/05</span>
                 </div>
                 <div className="listing-details">
@@ -120,7 +120,7 @@ export default class Listings extends Component {
               <div className="details">
                 <div className="user-img"></div>
                 <div className="user-details">
-                  <span className="user-name">John Smith</span>
+                  <span className="user-name">Jane Smith</span>
                   <span className="post-date">2019/05/05</span>
                 </div>
                 <div className="listing-details">
@@ -141,7 +141,7 @@ export default class Listings extends Component {
               <div className="details">
                 <div className="user-img"></div>
                 <div className="user-details">
-                  <span className="user-name">John Smith</span>
+                  <span className="user-name">Jane Smith</span>
                   <span className="post-date">2019/05/05</span>
                 </div>
                 <div className="listing-details">
