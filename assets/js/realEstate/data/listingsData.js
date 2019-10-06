@@ -1,7 +1,7 @@
 var listingsData = [
   {
     address: '123 - 95 Avenue',
-    location: 'Castle Downs',
+    neighbourhood: 'Castle Downs',
     city: 'Edmonton',
     bedrooms: 1,
     price: 850,
@@ -14,7 +14,7 @@ var listingsData = [
   },
   {
     address: '5483 - 78 St',
-    location: 'Northgate',
+    neighbourhood: 'Northgate',
     city: 'Edmonton',
     bedrooms: 2,
     price: 950,
@@ -27,7 +27,7 @@ var listingsData = [
   },
   {
     address: '604 - 79 Street',
-    location: 'Southgate',
+    neighbourhood: 'Southgate',
     city: 'Edmonton',
     bedrooms: 3,
     price: 1150,
@@ -40,7 +40,7 @@ var listingsData = [
   },
   {
     address: '7890 - 86 Street',
-    location: 'Downtown',
+    neighbourhood: 'Downtown',
     city: 'Edmonton',
     bedrooms: 3,
     price: 1450,
@@ -53,7 +53,7 @@ var listingsData = [
   },
   {
     address: '945 - 33 Street',
-    location: 'Northgate',
+    neighbourhood: 'Northgate',
     city: 'Edmonton',
     bedrooms: 2,
     price: 1650,
@@ -66,7 +66,7 @@ var listingsData = [
   },
   {
     address: '91 - 12 Avenue',
-    location: 'Downtown',
+    neighbourhood: 'Downtown',
     city: 'Edmonton',
     bedrooms: 1,
     price: 850,

@@ -9,13 +9,15 @@ export default class Filter extends Component {
     return (<section id='filter'>
       <h4>Filter</h4>
       <select name="neighbourhood" className="filters neighbourhood" onChange={this.props.change}>
+        <option value="all">Neighbourhood</option>
         <option value="Castle Downs">Castle Downs</option>
         <option value="Northgate">Northgate</option>
         <option value="Southgate">Southgate</option>
         <option value="Downtown">Downtown</option>
       </select>
 
-      <select name="house-type" className="filters house-type" onChange={this.props.change}>
+      <select name="homeType" className="filters home-type" onChange={this.props.change}>
+        <option value="any">Home Type</option>
         <option value="Townhouse">Townhouse</option>
         <option value="Semi-detached">Semi-detached</option>
         <option value="Duplex">Duplex</option>
@@ -23,9 +25,10 @@ export default class Filter extends Component {
       </select>
 
       <select name="bedrooms" className="filters bedrooms" onChange={this.props.change}>
-        <option value='1'>1 bedroom</option>
-        <option value='2'>2 bedroom</option>
-        <option value='3'>3 bedroom</option>
+        <option value='any'># of bedroom</option>
+        <option value='1'>1+ bedroom</option>
+        <option value='2'>2+ bedrooms</option>
+        <option value='3'>3+ bedrooms</option>
       </select>
 
       <div className="filters price">

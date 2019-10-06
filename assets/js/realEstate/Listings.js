@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBed, faSquare, faList, faTh, faMapMarker} from '@fortawesome/free-solid-svg-icons';
+import React, {Component} from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBed, faSquare, faList, faTh, faMapMarker} from '@fortawesome/free-solid-svg-icons'
 
 
 export default class Listings extends Component {
@@ -11,8 +11,14 @@ export default class Listings extends Component {
   }
 
   listListings () {
-    var {listingsData} = this.props;
-    return listingsData.map((listing, index) => {
+    var {listingsData} = this.props
+    if (listingsData == undefined || listingsData.length == 0) {
+      return (
+      <div className="error">
+        Sorry, your filter did not match any listing. 
+      </div>)
+    } else {
+      return listingsData.map((listing, index) => {
       return (
         <div className="listing" key={index}>
           <div className="listing-img" style={{background: `url("${listing.image}") no-repeat center center`}}>
@@ -32,12 +38,12 @@ export default class Listings extends Component {
           </div>
           <div className="bottom-info">
             <span className="rent">${listing.price} / month</span>
-            <span className="location"><FontAwesomeIcon icon={faMapMarker}/> {listing.location}, {listing.city}</span>
+            <span className="location"><FontAwesomeIcon icon={faMapMarker}/> {listing.neighbourhood}, {listing.city}</span>
           </div>
         </div>
-      );
-    });
-    return 
+      )
+      })
+    }
   }
 
   render () {

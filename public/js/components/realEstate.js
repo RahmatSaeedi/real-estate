@@ -52,6 +52,11 @@ var Filter = function (_Component) {
           { name: 'neighbourhood', className: 'filters neighbourhood', onChange: this.props.change },
           _react2.default.createElement(
             'option',
+            { value: 'all' },
+            'Neighbourhood'
+          ),
+          _react2.default.createElement(
+            'option',
             { value: 'Castle Downs' },
             'Castle Downs'
           ),
@@ -73,7 +78,12 @@ var Filter = function (_Component) {
         ),
         _react2.default.createElement(
           'select',
-          { name: 'house-type', className: 'filters house-type', onChange: this.props.change },
+          { name: 'homeType', className: 'filters home-type', onChange: this.props.change },
+          _react2.default.createElement(
+            'option',
+            { value: 'any' },
+            'Home Type'
+          ),
           _react2.default.createElement(
             'option',
             { value: 'Townhouse' },
@@ -100,18 +110,23 @@ var Filter = function (_Component) {
           { name: 'bedrooms', className: 'filters bedrooms', onChange: this.props.change },
           _react2.default.createElement(
             'option',
+            { value: 'any' },
+            '# of bedroom'
+          ),
+          _react2.default.createElement(
+            'option',
             { value: '1' },
-            '1 bedroom'
+            '1+ bedroom'
           ),
           _react2.default.createElement(
             'option',
             { value: '2' },
-            '2 bedroom'
+            '2+ bedrooms'
           ),
           _react2.default.createElement(
             'option',
             { value: '3' },
-            '3 bedroom'
+            '3+ bedrooms'
           )
         ),
         _react2.default.createElement(
@@ -308,96 +323,103 @@ var Listings = function (_Component) {
     value: function listListings() {
       var listingsData = this.props.listingsData;
 
-      return listingsData.map(function (listing, index) {
+      if (listingsData == undefined || listingsData.length == 0) {
         return _react2.default.createElement(
           'div',
-          { className: 'listing', key: index },
-          _react2.default.createElement(
+          { className: 'error' },
+          'Sorry, your filter did not match any listing.'
+        );
+      } else {
+        return listingsData.map(function (listing, index) {
+          return _react2.default.createElement(
             'div',
-            { className: 'listing-img', style: { background: 'url("' + listing.image + '") no-repeat center center' } },
-            _react2.default.createElement(
-              'span',
-              { className: 'address' },
-              listing.address
-            ),
+            { className: 'listing', key: index },
             _react2.default.createElement(
               'div',
-              { className: 'details' },
-              _react2.default.createElement('div', { className: 'user-img' }),
+              { className: 'listing-img', style: { background: 'url("' + listing.image + '") no-repeat center center' } },
               _react2.default.createElement(
-                'div',
-                { className: 'user-details' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'user-name' },
-                  'Jane Smith'
-                ),
-                _react2.default.createElement(
-                  'span',
-                  { className: 'post-date' },
-                  '2019/05/05'
-                )
+                'span',
+                { className: 'address' },
+                listing.address
               ),
               _react2.default.createElement(
                 'div',
-                { className: 'listing-details' },
+                { className: 'details' },
+                _react2.default.createElement('div', { className: 'user-img' }),
                 _react2.default.createElement(
                   'div',
-                  { className: 'floor-space' },
-                  ' ',
-                  _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faSquare, className: 'fa' }),
-                  ' ',
+                  { className: 'user-details' },
                   _react2.default.createElement(
                     'span',
-                    null,
-                    listing.floorSpace,
-                    ' ft\xB2'
+                    { className: 'user-name' },
+                    'Jane Smith'
                   ),
-                  ' '
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'bedrooms' },
-                  _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faBed, className: 'fa' }),
-                  ' ',
                   _react2.default.createElement(
                     'span',
-                    null,
-                    listing.bedrooms,
-                    ' bedrooms'
+                    { className: 'post-date' },
+                    '2019/05/05'
                   )
                 ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'view-listing-btn' },
-                  'View Listing'
+                  { className: 'listing-details' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'floor-space' },
+                    ' ',
+                    _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faSquare, className: 'fa' }),
+                    ' ',
+                    _react2.default.createElement(
+                      'span',
+                      null,
+                      listing.floorSpace,
+                      ' ft\xB2'
+                    ),
+                    ' '
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'bedrooms' },
+                    _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faBed, className: 'fa' }),
+                    ' ',
+                    _react2.default.createElement(
+                      'span',
+                      null,
+                      listing.bedrooms,
+                      ' bedrooms'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'view-listing-btn' },
+                    'View Listing'
+                  )
                 )
               )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'bottom-info' },
-            _react2.default.createElement(
-              'span',
-              { className: 'rent' },
-              '$',
-              listing.price,
-              ' / month'
             ),
             _react2.default.createElement(
-              'span',
-              { className: 'location' },
-              _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMapMarker }),
-              ' ',
-              listing.location,
-              ', ',
-              listing.city
+              'div',
+              { className: 'bottom-info' },
+              _react2.default.createElement(
+                'span',
+                { className: 'rent' },
+                '$',
+                listing.price,
+                ' / month'
+              ),
+              _react2.default.createElement(
+                'span',
+                { className: 'location' },
+                _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMapMarker }),
+                ' ',
+                listing.neighbourhood,
+                ', ',
+                listing.city
+              )
             )
-          )
-        );
-      });
-      return;
+          );
+        });
+      }
     }
   }, {
     key: 'render',
@@ -522,7 +544,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var listingsData = [{
   address: '123 - 95 Avenue',
-  location: 'Castle Downs',
+  neighbourhood: 'Castle Downs',
   city: 'Edmonton',
   bedrooms: 1,
   price: 850,
@@ -532,7 +554,7 @@ var listingsData = [{
   image: 'https://cdn.pixabay.com/photo/2018/08/09/06/41/apartment-3593876_960_720.jpg'
 }, {
   address: '5483 - 78 St',
-  location: 'Northgate',
+  neighbourhood: 'Northgate',
   city: 'Edmonton',
   bedrooms: 2,
   price: 950,
@@ -542,7 +564,7 @@ var listingsData = [{
   image: 'https://cdn.pixabay.com/photo/2018/02/12/10/07/apartment-lounge-3147892_960_720.jpg'
 }, {
   address: '604 - 79 Street',
-  location: 'Southgate',
+  neighbourhood: 'Southgate',
   city: 'Edmonton',
   bedrooms: 3,
   price: 1150,
@@ -552,7 +574,7 @@ var listingsData = [{
   image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/TownHouse_Galleria_new_entrance.jpg/640px-TownHouse_Galleria_new_entrance.jpg'
 }, {
   address: '7890 - 86 Street',
-  location: 'Downtown',
+  neighbourhood: 'Downtown',
   city: 'Edmonton',
   bedrooms: 3,
   price: 1450,
@@ -562,7 +584,7 @@ var listingsData = [{
   image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Duplex_house_in_Yeronga_03.2014.jpg/640px-Duplex_house_in_Yeronga_03.2014.jpg'
 }, {
   address: '945 - 33 Street',
-  location: 'Northgate',
+  neighbourhood: 'Northgate',
   city: 'Edmonton',
   bedrooms: 2,
   price: 1650,
@@ -572,7 +594,7 @@ var listingsData = [{
   image: 'https://live.staticflickr.com/3179/2698850178_fc45097068_b.jpg'
 }, {
   address: '91 - 12 Avenue',
-  location: 'Downtown',
+  neighbourhood: 'Downtown',
   city: 'Edmonton',
   bedrooms: 1,
   price: 850,
@@ -639,11 +661,22 @@ var RealEstate = function (_Component) {
     _this.state = {
       listingsData: _listingsData2.default,
       min_price: 0,
-      max_price: 10000,
+      max_price: 100000,
       min_space: 0,
-      max_space: 10000
+      max_space: 100000,
+      bedrooms: 'any',
+      neighbourhood: 'all',
+      homeType: 'any',
+      elevator: false,
+      pool: false,
+      basement: false,
+      gym: false,
+
+      filteredData: _listingsData2.default
     };
     _this.change = _this.change.bind(_this);
+    _this.filteredData = _this.filteredData.bind(_this);
+    _this.populateForm = _this.populateForm.bind(_this);
     return _this;
   }
 
@@ -655,9 +688,24 @@ var RealEstate = function (_Component) {
       var name = event.target.name;
       var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
       this.setState(_defineProperty({}, name, value), function () {
-        console.log(_this2.state);
+        _this2.filteredData();
       });
     }
+  }, {
+    key: 'filteredData',
+    value: function filteredData() {
+      var _this3 = this;
+
+      var newData = this.state.listingsData.filter(function (listing) {
+        return listing.price >= _this3.state.min_price && listing.price <= _this3.state.max_price && listing.floorSpace >= _this3.state.min_space && listing.floorSpace <= _this3.state.max_space && (listing.bedrooms >= _this3.state.bedrooms || _this3.state.bedrooms == 'any') && (listing.neighbourhood == _this3.state.neighbourhood || _this3.state.neighbourhood == 'all') && (listing.homeType == _this3.state.homeType || _this3.state.homeType == 'any') && (_this3.state.gym ? listing.extras.includes('gym') : true) && (_this3.state.elevator ? listing.extras.includes('elevator') : true) && (_this3.state.pool ? listing.extras.includes('pool') : true) && (_this3.state.basement ? listing.extras.includes('basement') : true);
+      });
+      this.setState({
+        filteredData: newData
+      });
+    }
+  }, {
+    key: 'populateForm',
+    value: function populateForm() {}
   }, {
     key: 'render',
     value: function render() {
@@ -669,7 +717,7 @@ var RealEstate = function (_Component) {
           'section',
           { id: 'content-area' },
           _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state }),
-          _react2.default.createElement(_Listings2.default, { listingsData: this.state.listingsData })
+          _react2.default.createElement(_Listings2.default, { listingsData: this.state.filteredData })
         ),
         _react2.default.createElement(
           'div',
