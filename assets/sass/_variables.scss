@@ -1,11 +1,15 @@
 $darkpurple: #0C0C50;
-$grey: rgb(240, 240, 240);
 $offwhite: #fff0ff;
 $pink: #FF7090;
+$darkpink: rgb(255, 0, 140);
 $offpink: #FF80A0;
-$darkgrey: #5D5D5D;
 
-
+$grey: rgb(240, 240, 240);
+$lightgrey: #dadde2;
+$lightlightgrey: #F8F8F8;
+$lightdarkgrey:  #828d9d;
+$darkgrey:  rgb(124, 123, 123);
+$darkdarkgrey: #5D5D5D;
 
 $navBgColor:  $darkpurple;
 $navTextColor: white;
@@ -17,4 +21,13 @@ $btnTextColor: white;
 $filterBg: $grey;
 $listingsBg: $offwhite;
 
-$filtersTitleColor: $darkgrey;
+$filtersTitleColor: $darkdarkgrey;
+$searchBoxFontColor: $darkgrey;
+
+
+$listingsResultsBgColor: $lightlightgrey;
+$listingBgColor: white;
+
+$viewListingBtnHoverBgndColor: $darkpink;
+$listinRentFontColor: $darkdarkgrey;
+$listingLocationFontColor: $lightdarkgrey;
