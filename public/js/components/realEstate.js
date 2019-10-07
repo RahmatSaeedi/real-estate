@@ -33,10 +33,64 @@ var Filter = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).call(this));
 
     _this.state = {};
+    _this.neighbourhoods = _this.neighbourhoods.bind(_this);
+    _this.homeTypes = _this.homeTypes.bind(_this);
+    _this.bedrooms = _this.bedrooms.bind(_this);
     return _this;
   }
 
   _createClass(Filter, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.props.populateAction();
+    }
+  }, {
+    key: 'neighbourhoods',
+    value: function neighbourhoods() {
+      if (this.props.globalState.populateFormsData.neighbourhoods != undefined) {
+        var neighbourhoods = this.props.globalState.populateFormsData.neighbourhoods;
+
+        return neighbourhoods.map(function (item, index) {
+          return _react2.default.createElement(
+            'option',
+            { key: index, value: item },
+            item
+          );
+        });
+      }
+    }
+  }, {
+    key: 'homeTypes',
+    value: function homeTypes() {
+      if (this.props.globalState.populateFormsData.homeTypes != undefined) {
+        var homeTypes = this.props.globalState.populateFormsData.homeTypes;
+
+        return homeTypes.map(function (item, index) {
+          return _react2.default.createElement(
+            'option',
+            { key: index, value: item },
+            item
+          );
+        });
+      }
+    }
+  }, {
+    key: 'bedrooms',
+    value: function bedrooms() {
+      if (this.props.globalState.populateFormsData.bedrooms != undefined) {
+        var bedrooms = this.props.globalState.populateFormsData.bedrooms;
+
+        return bedrooms.map(function (item, index) {
+          return _react2.default.createElement(
+            'option',
+            { key: index, value: item },
+            item,
+            '+ bedrooms'
+          );
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -55,26 +109,7 @@ var Filter = function (_Component) {
             { value: 'all' },
             'Neighbourhood'
           ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Castle Downs' },
-            'Castle Downs'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Northgate' },
-            'Northgate'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Southgate' },
-            'Southgate'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Downtown' },
-            'Downtown'
-          )
+          this.neighbourhoods()
         ),
         _react2.default.createElement(
           'select',
@@ -84,26 +119,7 @@ var Filter = function (_Component) {
             { value: 'any' },
             'Home Type'
           ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Townhouse' },
-            'Townhouse'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Semi-detached' },
-            'Semi-detached'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Duplex' },
-            'Duplex'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'Apartment' },
-            'Apartment'
-          )
+          this.homeTypes()
         ),
         _react2.default.createElement(
           'select',
@@ -113,21 +129,7 @@ var Filter = function (_Component) {
             { value: 'any' },
             '# of bedroom'
           ),
-          _react2.default.createElement(
-            'option',
-            { value: '1' },
-            '1+ bedroom'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: '2' },
-            '2+ bedrooms'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: '3' },
-            '3+ bedrooms'
-          )
+          this.bedrooms()
         ),
         _react2.default.createElement(
           'div',
@@ -642,6 +644,8 @@ var _listingsData2 = _interopRequireDefault(_listingsData);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -672,7 +676,8 @@ var RealEstate = function (_Component) {
       basement: false,
       gym: false,
 
-      filteredData: _listingsData2.default
+      filteredData: _listingsData2.default,
+      populateFormsData: ''
     };
     _this.change = _this.change.bind(_this);
     _this.filteredData = _this.filteredData.bind(_this);
@@ -705,7 +710,36 @@ var RealEstate = function (_Component) {
     }
   }, {
     key: 'populateForm',
-    value: function populateForm() {}
+    value: function populateForm() {
+      // Neighbourhood
+      var neighbourhoods = this.state.listingsData.map(function (item) {
+        return item.neighbourhood;
+      });
+      neighbourhoods = new Set(neighbourhoods);
+      neighbourhoods = [].concat(_toConsumableArray(neighbourhoods));
+
+      // Home Type
+      var homeTypes = this.state.listingsData.map(function (item) {
+        return item.homeType;
+      });
+      homeTypes = new Set(homeTypes);
+      homeTypes = [].concat(_toConsumableArray(homeTypes));
+
+      // Bedrooms
+      var bedrooms = this.state.listingsData.map(function (item) {
+        return item.bedrooms;
+      });
+      bedrooms = new Set(bedrooms);
+      bedrooms = [].concat(_toConsumableArray(bedrooms));
+
+      this.setState({
+        populateFormsData: {
+          neighbourhoods: neighbourhoods,
+          homeTypes: homeTypes,
+          bedrooms: bedrooms
+        }
+      });
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -716,7 +750,7 @@ var RealEstate = function (_Component) {
         _react2.default.createElement(
           'section',
           { id: 'content-area' },
-          _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state }),
+          _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state, populateAction: this.populateForm }),
           _react2.default.createElement(_Listings2.default, { listingsData: this.state.filteredData })
         ),
         _react2.default.createElement(

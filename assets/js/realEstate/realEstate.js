@@ -23,7 +23,8 @@ class RealEstate extends Component {
       basement: false,
       gym: false,
 
-      filteredData: listingsData
+      filteredData: listingsData,
+      populateFormsData: ''
     }
     this.change = this.change.bind(this)
     this.filteredData = this.filteredData.bind(this)
@@ -64,14 +65,43 @@ class RealEstate extends Component {
   }
 
   populateForm () {
-    
+    // Neighbourhood
+    var neighbourhoods = this.state.listingsData.map((item) => {
+      return item.neighbourhood
+    })
+    neighbourhoods = new Set(neighbourhoods)
+    neighbourhoods = [...neighbourhoods]
+
+
+    // Home Type
+    var homeTypes = this.state.listingsData.map((item) => {
+      return item.homeType
+    })
+    homeTypes = new Set(homeTypes)
+    homeTypes = [...homeTypes]
+
+
+    // Bedrooms
+    var bedrooms = this.state.listingsData.map((item) => {
+      return item.bedrooms
+    })
+    bedrooms = new Set(bedrooms)
+    bedrooms = [...bedrooms]
+
+    this.setState({
+      populateFormsData: {
+        neighbourhoods,
+        homeTypes,
+        bedrooms       
+      }
+    })
   }
 
   render () {
     return (<div>
       <Header />
       <section id="content-area">
-        <Filter change={this.change} globalState={this.state}/>
+        <Filter change={this.change} globalState={this.state} populateAction={this.populateForm}/>
         <Listings listingsData={this.state.filteredData}/>
       </section>
       <div className="footer">welp</div>
