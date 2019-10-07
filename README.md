@@ -17,7 +17,7 @@ A  real estate website project built with React, based on [`Joe Santos Garcia`](
 
 
 # Dependencies
-See [package.js](package.js)
+See [package.js](package.json)
  - Node JS 12
  - [@fortawesome/free-solid-svg-icons](https://github.com/FortAwesome/react-fontawesome)
  - webpack
