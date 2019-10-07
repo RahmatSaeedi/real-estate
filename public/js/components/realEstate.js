@@ -806,11 +806,7 @@ var RealEstate = function (_Component) {
           _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state, populateAction: this.populateForm }),
           _react2.default.createElement(_Listings2.default, { change: this.change, globalState: this.state, listingsData: this.state.filteredData, changeView: this.changeView })
         ),
-        _react2.default.createElement(
-          'div',
-          { className: 'footer' },
-          'welp'
-        )
+        _react2.default.createElement('div', { className: 'footer' })
       );
     }
   }]);

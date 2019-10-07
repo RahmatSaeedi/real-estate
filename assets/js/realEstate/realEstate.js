@@ -150,14 +150,10 @@ class RealEstate extends Component {
         <Filter change={this.change} globalState={this.state} populateAction={this.populateForm}/>
         <Listings change={this.change} globalState={this.state} listingsData={this.state.filteredData} changeView={this.changeView}/>
       </section>
-      <div className="footer">welp</div>
-      
+      <div className="footer"></div>
     </div>)
   }
 }
-
-
-
 
 const app = document.getElementById('app')
 ReactDOM.render(<RealEstate />, app)
