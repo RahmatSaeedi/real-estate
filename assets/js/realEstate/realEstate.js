@@ -24,6 +24,7 @@ class RealEstate extends Component {
       gym: false,
       sortby: 'price-dsc',
       view: 'box',
+      search: '',
 
       filteredData: listingsData,
       populateFormsData: ''
@@ -31,6 +32,7 @@ class RealEstate extends Component {
     this.change = this.change.bind(this)
     this.filteredData = this.filteredData.bind(this)
     this.populateForm = this.populateForm.bind(this)
+    this.changeView = this.changeView.bind(this)
   }
 
   componentWillMount(){
@@ -51,8 +53,13 @@ class RealEstate extends Component {
       [name]: value
     }, ()=>{
       this.filteredData()
-    },     console.log(this.state.sortby))
+    })
+  }
 
+  changeView(viewName){
+    this.setState({
+      view: viewName
+    })
   }
 
   filteredData () {
@@ -79,6 +86,23 @@ class RealEstate extends Component {
     } else {
       newData = newData.sort((a,b)=> {
         return b.price - a.price
+      })
+    }
+
+
+    if(this.state.search != ''){
+      newData = newData.filter((item)=>{
+        var neighbourhood = item.neighbourhood.toLowerCase()
+        var homeType = item.homeType.toLowerCase()
+        var extras = item.extras.toString().toLowerCase()
+        var address = item.address.toLowerCase()
+
+        var searchText = this.state.search.toLowerCase()
+
+        return (neighbourhood.match(searchText) != null) || 
+               (homeType.match(searchText) != null) ||
+               (extras.match(searchText) != null) ||
+               (address.match(searchText) != null)
       })
     }
 
@@ -124,7 +148,7 @@ class RealEstate extends Component {
       <Header />
       <section id="content-area">
         <Filter change={this.change} globalState={this.state} populateAction={this.populateForm}/>
-        <Listings change={this.change} globalState={this.state} listingsData={this.state.filteredData}/>
+        <Listings change={this.change} globalState={this.state} listingsData={this.state.filteredData} changeView={this.changeView}/>
       </section>
       <div className="footer">welp</div>
       

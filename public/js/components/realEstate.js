@@ -426,13 +426,20 @@ var Listings = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var listListingsClass;
+      if (this.props.globalState.view == 'box') {
+        listListingsClass = "col-md-3";
+      } else {
+        listListingsClass = "col-md-12";
+      }
+
       return _react2.default.createElement(
         'section',
         { id: 'listings' },
         _react2.default.createElement(
           'section',
           { className: 'search-area' },
-          _react2.default.createElement('input', { type: 'text', name: 'search' })
+          _react2.default.createElement('input', { type: 'text', name: 'search', onChange: this.props.change })
         ),
         _react2.default.createElement(
           'section',
@@ -462,8 +469,8 @@ var Listings = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'view' },
-              _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faList, className: 'fa' }),
-              _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faTh, className: 'fa' })
+              _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faList, className: 'fa', onClick: this.props.changeView.bind(null, "list") }),
+              _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faTh, className: 'fa', onClick: this.props.changeView.bind(null, "box") })
             )
           )
         ),
@@ -472,7 +479,7 @@ var Listings = function (_Component) {
           { id: 'listings-results' },
           _react2.default.createElement(
             'div',
-            { className: 'col-md-3' },
+            { className: listListingsClass },
             this.listListings()
           )
         ),
@@ -677,6 +684,7 @@ var RealEstate = function (_Component) {
       gym: false,
       sortby: 'price-dsc',
       view: 'box',
+      search: '',
 
       filteredData: _listingsData2.default,
       populateFormsData: ''
@@ -684,6 +692,7 @@ var RealEstate = function (_Component) {
     _this.change = _this.change.bind(_this);
     _this.filteredData = _this.filteredData.bind(_this);
     _this.populateForm = _this.populateForm.bind(_this);
+    _this.changeView = _this.changeView.bind(_this);
     return _this;
   }
 
@@ -707,7 +716,14 @@ var RealEstate = function (_Component) {
       var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
       this.setState(_defineProperty({}, name, value), function () {
         _this2.filteredData();
-      }, console.log(this.state.sortby));
+      });
+    }
+  }, {
+    key: 'changeView',
+    value: function changeView(viewName) {
+      this.setState({
+        view: viewName
+      });
     }
   }, {
     key: 'filteredData',
@@ -725,6 +741,19 @@ var RealEstate = function (_Component) {
       } else {
         newData = newData.sort(function (a, b) {
           return b.price - a.price;
+        });
+      }
+
+      if (this.state.search != '') {
+        newData = newData.filter(function (item) {
+          var neighbourhood = item.neighbourhood.toLowerCase();
+          var homeType = item.homeType.toLowerCase();
+          var extras = item.extras.toString().toLowerCase();
+          var address = item.address.toLowerCase();
+
+          var searchText = _this3.state.search.toLowerCase();
+
+          return neighbourhood.match(searchText) != null || homeType.match(searchText) != null || extras.match(searchText) != null || address.match(searchText) != null;
         });
       }
 
@@ -775,7 +804,7 @@ var RealEstate = function (_Component) {
           'section',
           { id: 'content-area' },
           _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state, populateAction: this.populateForm }),
-          _react2.default.createElement(_Listings2.default, { change: this.change, globalState: this.state, listingsData: this.state.filteredData })
+          _react2.default.createElement(_Listings2.default, { change: this.change, globalState: this.state, listingsData: this.state.filteredData, changeView: this.changeView })
         ),
         _react2.default.createElement(
           'div',

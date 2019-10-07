@@ -47,10 +47,17 @@ export default class Listings extends Component {
   }
 
   render () {
+    var listListingsClass
+    if(this.props.globalState.view == 'box'){
+      listListingsClass = "col-md-3";
+    } else {
+      listListingsClass = "col-md-12";
+    }
+
     return (
     <section id='listings'>
       <section className="search-area" >
-        <input type="text" name="search" />
+        <input type="text" name="search" onChange={this.props.change} />
       </section>
       <section className="sortby-area" >
         <div id="results">390 results found</div>
@@ -60,18 +67,17 @@ export default class Listings extends Component {
             <option value="price-dsc">Highest Price</option>
           </select>
           <div className="view">
-            <FontAwesomeIcon icon={faList} className='fa' />
-            <FontAwesomeIcon icon={faTh} className='fa' />
+            <FontAwesomeIcon icon={faList} className='fa' onClick={this.props.changeView.bind(null,"list")} />
+            <FontAwesomeIcon icon={faTh} className='fa' onClick={this.props.changeView.bind(null,"box")} />
           </div>
         </div>
       </section>
       <section id="listings-results">
-      <div className="col-md-3">
-        
-        {this.listListings()}
 
-      
+      <div className={listListingsClass}>
+        {this.listListings()}
       </div>
+
       </section>
       <section id="pagination">
         <ul className="pages">

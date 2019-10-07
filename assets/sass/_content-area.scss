@@ -121,13 +121,18 @@
   #listings-results {
     background: $listingsResultsBgColor;
     width: 100%;
-    .col-md-3 {
+    .col-md-3, .col-md-12 {
       display: block;
       text-align: center;
       width: 100%;
       margin: 0 15px;
       justify-content: center;
       align-items: center;
+    }
+
+    .col-md-12 > .listing {
+      display: block;
+    }
 
       .listing {
         display: inline-block;
@@ -282,7 +287,6 @@
 
         }
       }
-    }
 
 
   }
