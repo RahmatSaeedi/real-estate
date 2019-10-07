@@ -1,5 +1,5 @@
 # Real Estate
-A  real estate website project built with React, based on [`Joe Santos Garcia`](https://github.com/codingphasedotcom) tutorials.
+A  real estate website project built with React, based on [`Joe Santos Garcia`](https://github.com/codingphasedotcom)'s tutorials.
 
 # Show Case
 ![a listing Card](docs/card.gif "A listing Card")
@@ -27,7 +27,7 @@ See [package.json](package.json)
  - gulp
  - bable
 
- # Descriptions
+ # Description
  ```bash
 ├─── docs # documentations
 ├─── assets # React and SASS files
