@@ -55,9 +55,9 @@ export default class Listings extends Component {
       <section className="sortby-area" >
         <div id="results">390 results found</div>
         <div id="sort-options">
-          <select name="sortby" id="sortby">
-            <option value="price-asc">Highest Price</option>
-            <option value="price-dec">Lowest Price</option>
+          <select name="sortby" id="sortby" onChange={this.props.change}>
+            <option value="price-asc">Lowest Price</option>
+            <option value="price-dsc">Highest Price</option>
           </select>
           <div className="view">
             <FontAwesomeIcon icon={faList} className='fa' />

@@ -447,16 +447,16 @@ var Listings = function (_Component) {
             { id: 'sort-options' },
             _react2.default.createElement(
               'select',
-              { name: 'sortby', id: 'sortby' },
+              { name: 'sortby', id: 'sortby', onChange: this.props.change },
               _react2.default.createElement(
                 'option',
                 { value: 'price-asc' },
-                'Highest Price'
+                'Lowest Price'
               ),
               _react2.default.createElement(
                 'option',
-                { value: 'price-dec' },
-                'Lowest Price'
+                { value: 'price-dsc' },
+                'Highest Price'
               )
             ),
             _react2.default.createElement(
@@ -675,6 +675,8 @@ var RealEstate = function (_Component) {
       pool: false,
       basement: false,
       gym: false,
+      sortby: 'price-dsc',
+      view: 'box',
 
       filteredData: _listingsData2.default,
       populateFormsData: ''
@@ -686,6 +688,17 @@ var RealEstate = function (_Component) {
   }
 
   _createClass(RealEstate, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var listingsData = this.state.listingsData.sort(function (a, b) {
+        return a.price - b.price;
+      });
+
+      this.setState({
+        listingsData: listingsData
+      });
+    }
+  }, {
     key: 'change',
     value: function change(event) {
       var _this2 = this;
@@ -694,7 +707,7 @@ var RealEstate = function (_Component) {
       var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
       this.setState(_defineProperty({}, name, value), function () {
         _this2.filteredData();
-      });
+      }, console.log(this.state.sortby));
     }
   }, {
     key: 'filteredData',
@@ -704,6 +717,17 @@ var RealEstate = function (_Component) {
       var newData = this.state.listingsData.filter(function (listing) {
         return listing.price >= _this3.state.min_price && listing.price <= _this3.state.max_price && listing.floorSpace >= _this3.state.min_space && listing.floorSpace <= _this3.state.max_space && (listing.bedrooms >= _this3.state.bedrooms || _this3.state.bedrooms == 'any') && (listing.neighbourhood == _this3.state.neighbourhood || _this3.state.neighbourhood == 'all') && (listing.homeType == _this3.state.homeType || _this3.state.homeType == 'any') && (_this3.state.gym ? listing.extras.includes('gym') : true) && (_this3.state.elevator ? listing.extras.includes('elevator') : true) && (_this3.state.pool ? listing.extras.includes('pool') : true) && (_this3.state.basement ? listing.extras.includes('basement') : true);
       });
+
+      if (this.state.sortby == 'price-asc') {
+        newData = newData.sort(function (a, b) {
+          return a.price - b.price;
+        });
+      } else {
+        newData = newData.sort(function (a, b) {
+          return b.price - a.price;
+        });
+      }
+
       this.setState({
         filteredData: newData
       });
@@ -716,21 +740,21 @@ var RealEstate = function (_Component) {
         return item.neighbourhood;
       });
       neighbourhoods = new Set(neighbourhoods);
-      neighbourhoods = [].concat(_toConsumableArray(neighbourhoods));
+      neighbourhoods = [].concat(_toConsumableArray(neighbourhoods)).sort();
 
       // Home Type
       var homeTypes = this.state.listingsData.map(function (item) {
         return item.homeType;
       });
       homeTypes = new Set(homeTypes);
-      homeTypes = [].concat(_toConsumableArray(homeTypes));
+      homeTypes = [].concat(_toConsumableArray(homeTypes)).sort();
 
       // Bedrooms
       var bedrooms = this.state.listingsData.map(function (item) {
         return item.bedrooms;
       });
       bedrooms = new Set(bedrooms);
-      bedrooms = [].concat(_toConsumableArray(bedrooms));
+      bedrooms = [].concat(_toConsumableArray(bedrooms)).sort();
 
       this.setState({
         populateFormsData: {
@@ -751,7 +775,7 @@ var RealEstate = function (_Component) {
           'section',
           { id: 'content-area' },
           _react2.default.createElement(_Filter2.default, { change: this.change, globalState: this.state, populateAction: this.populateForm }),
-          _react2.default.createElement(_Listings2.default, { listingsData: this.state.filteredData })
+          _react2.default.createElement(_Listings2.default, { change: this.change, globalState: this.state, listingsData: this.state.filteredData })
         ),
         _react2.default.createElement(
           'div',
